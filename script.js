@@ -20,3 +20,12 @@ function addBookToLibrary() {
   myLibrary.push(new Book(title, author, pages, read));
 }
 
+function displayBooks() {
+  for (i = 0; i < myLibrary.length; i++) {
+    console.log(myLibrary[i].info());
+  }
+}
+
+myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'no'));
+myLibrary.push(new Book('Test Book', 'Test Guy', '434', 'yes'));
+myLibrary.push(new Book('The Alchemist', 'Paolo Coehlo', 330, 'yes'));

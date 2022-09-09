@@ -24,11 +24,11 @@ function addBookToLibrary() {
 
 function displayBooks() {
   for (i = 0; i < myLibrary.length; i++) {
-    books.appendChild(document.createElement('p'));
+    let book = books.appendChild(document.createElement('p'));
     book.textContent = myLibrary[i].info();
   }
 }
 
-myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'no'));
-myLibrary.push(new Book('Test Book', 'Test Guy', '434', 'yes'));
-myLibrary.push(new Book('The Alchemist', 'Paolo Coehlo', 330, 'yes'));
+myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not read'));
+myLibrary.push(new Book('Test Book', 'Test Guy', '434', 'read'));
+myLibrary.push(new Book('The Alchemist', 'Paolo Coehlo', 330, 'read'));

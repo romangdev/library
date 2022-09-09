@@ -34,6 +34,12 @@ function displayBooks() {
   removeAllChildNodes();
   for (i = 0; i < myLibrary.length; i++) {
     let book = books.appendChild(document.createElement('p'));
+    let removeBtn = books.appendChild(document.createElement('button'));
+
+    removeBtn.textContent = 'remove';
+    removeBtn.setAttribute('data-id', i);
+    removeBtn.classList.add('removeBtn');
+
     book.textContent = myLibrary[i].info();
   }
 }
@@ -47,3 +53,18 @@ newBookButton.addEventListener('click', () => {
 });
 
 displayBooks();
+
+let removeBtns = document.querySelectorAll('.removeBtn');
+
+removeBtns.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    myLibrary.splice(btn.getAttribute('data-id'), 1);
+    displayBooks();
+  });
+});
+
+/* 
+In display books function, for each new book object displayed, create new button
+Associate newly created button with book object using data-attribute
+When button is pressed, it removes the book from the library (and display)
+*/

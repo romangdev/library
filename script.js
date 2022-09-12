@@ -2,6 +2,7 @@ let myLibrary = [];
 
 const books = document.querySelector('.books');
 const newBookButton = document.querySelector('.new-book');
+let removeBtns = null;
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -21,7 +22,6 @@ function addBookToLibrary() {
   read = prompt("Have you read the book?");
 
   myLibrary.push(new Book(title, author, pages, read));
-  displayBooks();
 }
 
 function removeAllChildNodes() {
@@ -32,7 +32,7 @@ function removeAllChildNodes() {
 
 function displayBooks() {
   removeAllChildNodes();
-  for (i = 0; i < myLibrary.length; i++) {
+  for (let i = 0; i < myLibrary.length; i++) {
     let book = books.appendChild(document.createElement('p'));
     let removeBtn = books.appendChild(document.createElement('button'));
 
@@ -48,19 +48,20 @@ myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not read'));
 myLibrary.push(new Book('Test Book', 'Test Guy', '434', 'read'));
 myLibrary.push(new Book('The Alchemist', 'Paolo Coehlo', 330, 'read'));
 
+displayBooks();
+removeBtns = document.querySelectorAll('.removeBtn');
+
 newBookButton.addEventListener('click', () => {
   addBookToLibrary();
+  displayBooks();
+  removeBtns = document.querySelectorAll('.removeBtn');
 });
 
-displayBooks();
-
-let removeBtns = document.querySelectorAll('.removeBtn');
-
-removeBtns.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    myLibrary.splice(btn.getAttribute('data-id'), 1);
+books.addEventListener('click', (e) => {
+  if (e.target.classList.contains('removeBtn')) {
+    myLibrary.splice(e.target.getAttribute('data-id'), 1);
     displayBooks();
-  });
+  }
 });
 
 /* 

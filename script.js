@@ -15,18 +15,26 @@ Book.prototype.info = function() {
 }
 
 Book.prototype.checkRead = function() {
-  if (this.read === "read") {
-    this.read = "not read";
+  if (this.read === "READ") {
+    this.read = "NOT READ";
   } else {
-    this.read = "read";
+    this.read = "READ";
   }
 }
 
 function addBookToLibrary() {
   title = prompt("Enter book title:");
   author = prompt("Enter book author:");
-  pages = prompt("Enter number of pages in book:");
-  read = prompt("Have you read the book?");
+
+  pages = 'hold';
+  while (isNaN(pages)) {
+    pages = prompt("Enter number of pages in book: (ensure it's a number!)");
+  }
+
+  read = null;
+  while (read != "READ" && read != "NOT READ") {
+    read = prompt("Have you read the book? (type only \"read\" or \"not read\"").toUpperCase();
+  }
 
   myLibrary.push(new Book(title, author, pages, read));
 }
@@ -61,9 +69,10 @@ function displayBooks() {
   }
 }
 
-myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not read'));
-myLibrary.push(new Book('Test Book', 'Test Guy', '434', 'read'));
-myLibrary.push(new Book('The Alchemist', 'Paolo Coehlo', 330, 'read'));
+// filler books to display functionality
+myLibrary.push(new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'NOT READ'));
+myLibrary.push(new Book('Test Book', 'Test Guy', '434', 'READ'));
+myLibrary.push(new Book('The Alchemist', 'Paolo Coehlo', 330, 'READ'));
 
 displayBooks();
 
@@ -72,6 +81,7 @@ newBookButton.addEventListener('click', () => {
   displayBooks();
 });
 
+// if a button is clicked, initiate the corresponding action for the correct book
 books.addEventListener('click', (e) => {
   if (e.target.classList.contains('remove-btn')) {
     myLibrary.splice(e.target.getAttribute('data-id'), 1);

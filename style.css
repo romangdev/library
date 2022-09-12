@@ -1,0 +1,19 @@
+.new-book {
+  margin-bottom: 20px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid black;
+  gap: 20px;
+  margin-bottom: 10px;;
+}
+
+.book-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-left: 10px;
+}

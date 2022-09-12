@@ -40,17 +40,22 @@ function removeAllChildNodes() {
 function displayBooks() {
   removeAllChildNodes();
   for (let i = 0; i < myLibrary.length; i++) {
-    let book = books.appendChild(document.createElement('p'));
-    let removeBtn = books.appendChild(document.createElement('button'));
-    let readBtn = books.appendChild(document.createElement('button'));
+    let bookCard = books.appendChild(document.createElement('div'));
+    let bookButtons = bookCard.appendChild(document.createElement('div'));
+    let book = bookCard.appendChild(document.createElement('p'));
+    let removeBtn = bookButtons.appendChild(document.createElement('button'));
+    let readBtn = bookButtons.appendChild(document.createElement('button'));
+
+    bookCard.classList.add('book-card');
+    bookButtons.classList.add('book-buttons');
 
     removeBtn.textContent = 'Remove';
     removeBtn.setAttribute('data-id', i);
-    removeBtn.classList.add('removeBtn');
+    removeBtn.classList.add('remove-btn');
 
     readBtn.textContent = 'Read?';
     readBtn.setAttribute('data-id-read', i);
-    readBtn.classList.add('readBtn');
+    readBtn.classList.add('read-btn');
 
     book.textContent = myLibrary[i].info();
   }
@@ -68,17 +73,11 @@ newBookButton.addEventListener('click', () => {
 });
 
 books.addEventListener('click', (e) => {
-  if (e.target.classList.contains('removeBtn')) {
+  if (e.target.classList.contains('remove-btn')) {
     myLibrary.splice(e.target.getAttribute('data-id'), 1);
     displayBooks();
-  } else if (e.target.classList.contains('readBtn')) {
+  } else if (e.target.classList.contains('read-btn')) {
     myLibrary[e.target.getAttribute('data-id-read')].checkRead();
     displayBooks();
   }
 });
-
-/* 
-In display books function, for each new book object displayed, create new button
-Associate newly created button with book object using data-attribute
-When button is pressed, it removes the book from the library (and display)
-*/
